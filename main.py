@@ -13,7 +13,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 BOT_TOKEN = os.getenv("BOT_TOKEN")
-WEBAPP_URL = "https://твойusername.github.io/telegram-miniapp/"  # Замени на свой URL
+WEBAPP_URL = "https://redsloboda.github.io/telegram-miniapp/"  
 
 bot = Bot(token=BOT_TOKEN, default=DefaultBotProperties(parse_mode="HTML"))
 dp = Dispatcher()
@@ -71,4 +71,5 @@ async def main():
     await dp.start_polling(bot)
 
 if __name__ == "__main__":
+
     asyncio.run(main())
