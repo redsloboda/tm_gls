@@ -1,25 +1,34 @@
 const tg = window.Telegram.WebApp;
 tg.expand();
 
-// Функция отправки
+// Определяем тип услуги из URL
+const urlParams = new URLSearchParams(window.location.search);
+const service = urlParams.get('service') || 'wash';  // По умолчанию автомойка
+
+// Заполняем время 9:00-21:00
+const timeSelect = document.getElementById('time');
+for (let h = 9; h <= 21; h++) {
+    const option = document.createElement('option');
+    option.value = `${h.toString().padStart(2, '0')}:00`;
+    option.textContent = `${h.toString().padStart(2, '0')}:00`;
+    timeSelect.appendChild(option);
+}
+
+tg.MainButton.setText('📝 Записать').onClick(submitBooking).show();
+
 function submitBooking() {
-    const date = document.getElementById('date').value;
-    const time = document.getElementById('time').value;
-    const car_number = document.getElementById('car_number').value.toUpperCase();
-    const car_model = document.getElementById('car_model').value;
+    const data = {
+        service: service,  // wash или service
+        date: document.getElementById('date').value,
+        time: document.getElementById('time').value,
+        car_model: document.getElementById('car_model').value
+    };
     
-    if (!date || !time || !car_number || !car_model) {
+    if (!data.date || !data.time || !data.car_model) {
         tg.showAlert('Заполните все поля!');
         return;
     }
     
-    const data = { date, time, car_number, car_model };
-    console.log('Отправляем:', data);  // Для отладки
-    
     tg.sendData(JSON.stringify(data));
-    tg.showAlert('Запись отправлена!');
     tg.close();
 }
-
-// Кнопка MainButton (альтернатива)
-tg.MainButton.setText('📝 Записать').onClick(submitBooking).show();
