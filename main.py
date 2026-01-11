@@ -1,8 +1,8 @@
 import asyncio
 import csv
+import json
 import os
 from datetime import datetime
-from typing import Any
 
 from aiogram import Bot, Dispatcher, F, Router
 from aiogram.filters import CommandStart
@@ -27,30 +27,36 @@ async def start_handler(message: Message):
     ])
     await message.answer(
         "<b>🚗 АвтоЗапись</b>\n\n"
-        "Нажми кнопку ниже для записи:",
+        "Нажми кнопку ниже:",
         reply_markup=kb
     )
 
 @router.message(F.web_app_data)
 async def webapp_data_handler(message: Message):
     print(f"✅ Получены данные: {message.web_app_data.data}")
-    data: dict[str, Any] = message.web_app_data
+    
+    # Парсим JSON данные из WebAppData
+    booking_json = json.loads(message.web_app_data.data)
+    
     booking_data = {
-        "date": data.get("date", ""),
-        "time": data.get("time", ""),
-        "car_number": data.get("car_number", ""),
-        "car_model": data.get("car_model", ""),
+        "date": booking_json.get("date", ""),
+        "time": booking_json.get("time", ""),
+        "car_number": booking_json.get("car_number", ""),
+        "car_model": booking_json.get("car_model", ""),
         "employee": message.from_user.full_name,
         "user_id": message.from_user.id,
         "timestamp": datetime.now().isoformat()
     }
     
+    # Сохраняем в CSV
+    file_exists = os.path.exists("bookings.csv")
     with open("bookings.csv", "a", newline="", encoding="utf-8") as f:
-        if os.path.getsize("bookings.csv") == 0:
-            writer = csv.DictWriter(f, fieldnames=booking_data.keys())
-            writer.writeheader()
         writer = csv.DictWriter(f, fieldnames=booking_data.keys())
+        if not file_exists:
+            writer.writeheader()
         writer.writerow(booking_data)
+    
+    print(f"📄 Сохранено в bookings.csv")
     
     await message.answer(
         f"✅ <b>Запись создана!</b>\n\n"
