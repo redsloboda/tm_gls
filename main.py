@@ -19,8 +19,8 @@ load_dotenv()
 BOT_TOKEN = os.getenv("BOT_TOKEN")
 
 # ТВОИ календари (замени на реальные ID)
-CALENDAR_ID_WASH = 'мойка_calendar_id@group.calendar.google.com'  # ID календаря автомойки
-CALENDAR_ID_SERVICE = 'сервис_calendar_id@group.calendar.google.com'  # ID календаря автосервиса
+CALENDAR_ID_WASH = '644683696f7253bcf29a67b425347e1123f7e070087dcb50102f50741e61d906@group.calendar.google.com'  # ID календаря автомойки
+CALENDAR_ID_SERVICE = '40a8ad558f21772c8849903637ffd06e441d4bb90ba62ea136f73c89b23e9eef@group.calendar.google.com'  # ID календаря автосервиса
 
 WEBAPP_URL_WASH = "https://redsloboda.github.io/tm_gls/?service=wash"
 WEBAPP_URL_SERVICE = "https://redsloboda.github.io/tm_gls/?service=service"
