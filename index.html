@@ -1,1 +1,55 @@
-
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>АвтоЗапись</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, sans-serif; margin: 0; padding: 20px; background: #f0f2f5; }
+        .card { background: white; border-radius: 12px; padding: 20px; margin: 10px 0; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        input, select { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; margin: 8px 0; box-sizing: border-box; }
+        button { background: #0088cc; color: white; padding: 14px; border: none; border-radius: 8px; width: 100%; font-size: 16px; font-weight: bold; }
+        button:hover { background: #006ba3; }
+        h1 { color: #0088cc; text-align: center; }
+    </style>
+</head>
+<body>
+    <h1>🚗 АвтоЗапись</h1>
+    
+    <div class="card">
+        <label>📅 Дата:</label>
+        <input type="date" id="date" required>
+    </div>
+    
+    <div class="card">
+        <label>🕒 Время:</label>
+        <select id="time" required>
+            <option value="">Выберите время</option>
+            <option>09:00</option>
+            <option>10:00</option>
+            <option>11:00</option>
+            <option>12:00</option>
+            <option>13:00</option>
+            <option>14:00</option>
+            <option>15:00</option>
+            <option>16:00</option>
+            <option>17:00</option>
+        </select>
+    </div>
+    
+    <div class="card">
+        <label>🚗 Госномер:</label>
+        <input type="text" id="car_number" placeholder="А123БВ77" maxlength="9" required>
+    </div>
+    
+    <div class="card">
+        <label>🚙 Марка/Модель:</label>
+        <input type="text" id="car_model" placeholder="Toyota Camry" required>
+    </div>
+    
+    <button onclick="submitBooking()">📝 Записать</button>
+    
+    <script src="app.js"></script>
+</body>
+</html>
