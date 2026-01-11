@@ -13,7 +13,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 BOT_TOKEN = os.getenv("BOT_TOKEN")
-WEBAPP_URL = "https://redsloboda.github.io/telegram-miniapp/"  
+WEBAPP_URL = "https://redsloboda.github.io/tm_gls/"  
 
 bot = Bot(token=BOT_TOKEN, default=DefaultBotProperties(parse_mode="HTML"))
 dp = Dispatcher()
@@ -73,3 +73,4 @@ async def main():
 if __name__ == "__main__":
 
     asyncio.run(main())
+
